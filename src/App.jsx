@@ -2,13 +2,20 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import store from './store/store';
+
+// Components
 import Navbar from './components/Navbar';
+import About from './components/About';
+import Contact from './components/Contact';
+
+// Pages
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Jobs from './pages/Jobs';
 import JobDetails from './pages/JobDetails';
 import PostJob from './pages/PostJob';
-import Home from './pages/Home';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -24,6 +31,9 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/job/:id" element={<JobDetails />} />
               <Route path="/post-job" element={<PostJob />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </main>
           <Toaster 

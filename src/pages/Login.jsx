@@ -22,6 +22,8 @@ export default function Login() {
   useEffect(() => {
     if (isError) {
       toast.error(message);
+    dispatch(reset());
+    return;
     }
 
     if (isSuccess || user) {
@@ -37,17 +39,22 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="heading-2 text-center">Welcome back</h2>
-          <p className="mt-2 text-center text-body">
+          <h2 className="text-3xl font-extrabold text-white text-center">
+            Welcome back
+          </h2>
+          <p className="mt-2 text-center text-gray-200">
             Don't have an account?{' '}
-            <Link to="/register" className="link">
+            <Link
+              to="/register"
+              className="font-medium text-white hover:text-gray-300 transition-colors"
+            >
               Sign up
             </Link>
           </p>
@@ -59,10 +66,15 @@ export default function Login() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="card"
+          className="bg-white rounded-lg shadow-lg px-8 py-10"
         >
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="input-group">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="input-group"
+            >
               <label htmlFor="email" className="input-label">
                 Email address
               </label>
@@ -84,9 +96,14 @@ export default function Login() {
                   }
                 />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="input-group">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="input-group"
+            >
               <label htmlFor="password" className="input-label">
                 Password
               </label>
@@ -108,9 +125,14 @@ export default function Login() {
                   }
                 />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex items-center justify-between">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="flex items-center justify-between"
+            >
               <div className="flex items-center">
                 <input
                   id="remember-me"
@@ -124,13 +146,20 @@ export default function Login() {
               </div>
 
               <div className="text-sm">
-                <Link to="/forgot-password" className="link">
+                <Link
+                  to="/forgot-password"
+                  className="font-medium text-primary-600 hover:text-primary-500 transition-colors"
+                >
                   Forgot your password?
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 1 }}
+            >
               <button
                 type="submit"
                 className="btn btn-primary w-full"
@@ -145,10 +174,15 @@ export default function Login() {
                   'Sign in'
                 )}
               </button>
-            </div>
+            </motion.div>
           </form>
 
-          <div className="mt-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            className="mt-6"
+          >
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
@@ -163,7 +197,7 @@ export default function Login() {
             <div className="mt-6 grid grid-cols-2 gap-3">
               <button
                 type="button"
-                className="btn btn-secondary w-full"
+                className="btn btn-secondary w-full hover:bg-gray-100 transition-colors"
                 onClick={() => toast.error('Google login not implemented yet')}
               >
                 <img
@@ -175,7 +209,7 @@ export default function Login() {
               </button>
               <button
                 type="button"
-                className="btn btn-secondary w-full"
+                className="btn btn-secondary w-full hover:bg-gray-100 transition-colors"
                 onClick={() => toast.error('GitHub login not implemented yet')}
               >
                 <img
@@ -186,7 +220,7 @@ export default function Login() {
                 GitHub
               </button>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </div>

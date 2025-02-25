@@ -7,7 +7,7 @@ export default function JobCard({ job }) {
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <Link to={`/jobs/${job._id}`} className="block">
-            <h3 className="heading-3 mb-1 hover:text-primary-600 transition-colors">
+            <h3 className="heading-3 mb-1 hover:text-orange-600 transition-colors">
               {job.title}
             </h3>
             <p className="text-body mb-4">{job.company}</p>

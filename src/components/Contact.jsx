@@ -1,146 +1,120 @@
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    console.log(formData);
   };
 
   return (
-    <div className="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-xl lg:max-w-4xl">
-        <h2 className="text-4xl font-bold tracking-tight text-gray-900">Contact Us</h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">
-          Have questions? We're here to help. Send us a message and we'll respond as soon as possible.
-        </p>
-        <div className="mt-16 flex flex-col gap-16 sm:gap-y-20 lg:flex-row">
-          <form onSubmit={handleSubmit} className="lg:flex-1">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div>
-                <label htmlFor="firstName" className="block text-sm font-semibold leading-6 text-gray-900">
-                  First name
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  className="input-field mt-2.5"
-                />
-              </div>
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Last name
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className="input-field mt-2.5"
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="input-field mt-2.5"
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="phone" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Phone number
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="input-field mt-2.5"
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  id="message"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="input-field mt-2.5"
-                />
-              </div>
-            </div>
-            <div className="mt-8 flex justify-end">
-              <button
-                type="submit"
-                className="btn-primary"
-              >
-                Send message
-              </button>
-            </div>
-          </form>
-
-          <div className="lg:flex-1">
-            <div className="rounded-2xl bg-gray-50 p-10">
-              <h3 className="text-base font-semibold leading-7 text-gray-900">Our Contact Information</h3>
-              <dl className="mt-3 space-y-3 text-sm leading-7 text-gray-600">
-                <div className="flex gap-x-4">
-                  <dt className="flex-none">
-                    <span className="sr-only">Address</span>
-                    <EnvelopeIcon className="h-6 w-5 text-gray-400" aria-hidden="true" />
-                  </dt>
-                  <dd>
-                    <a className="hover:text-gray-900" href="mailto:support@jobportal.com">
-                      support@jobportal.com
-                    </a>
-                  </dd>
-                </div>
-                <div className="flex gap-x-4">
-                  <dt className="flex-none">
-                    <span className="sr-only">Phone</span>
-                    <PhoneIcon className="h-6 w-5 text-gray-400" aria-hidden="true" />
-                  </dt>
-                  <dd>
-                    <a className="hover:text-gray-900" href="tel:+1 (555) 234-5678">
-                      +1 (555) 234-5678
-                    </a>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </div>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="w-full min-h-screen bg-[#f8fafc] flex flex-col items-center px-4 py-16"
+    >
+      <div className="w-full max-w-4xl">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold mb-2">Contact</h1>
+          <p className="text-gray-600">Send us a message or get in touch.</p>
         </div>
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="grid md:grid-cols-2 gap-6">
+            {["firstName", "lastName"].map((field, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+                className="space-y-2"
+              >
+                <label htmlFor={field} className="font-medium capitalize">
+                  {field.replace(/([A-Z])/g, " $1")}
+                </label>
+                <motion.input
+                  id={field}
+                  placeholder={field.replace(/([A-Z])/g, " $1")}
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none transition-all"
+                  value={formData[field]}
+                  whileFocus={{ scale: 1.05 }}
+                  onChange={(e) =>
+                    setFormData({ ...formData, [field]: e.target.value })
+                  }
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {["email", "phone"].map((field, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (index + 2) * 0.1, duration: 0.4 }}
+                className="space-y-2"
+              >
+                <label htmlFor={field} className="font-medium capitalize">
+                  {field.replace(/([A-Z])/g, " $1")}
+                </label>
+                <motion.input
+                  id={field}
+                  type={field === "email" ? "email" : "tel"}
+                  placeholder={field === "email" ? "you@company.com" : "Phone Number"}
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none transition-all"
+                  value={formData[field]}
+                  whileFocus={{ scale: 1.05 }}
+                  onChange={(e) =>
+                    setFormData({ ...formData, [field]: e.target.value })
+                  }
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
+            className="space-y-2"
+          >
+            <label htmlFor="message" className="font-medium">
+              What would you like us to know about you?
+            </label>
+            <motion.textarea
+              id="message"
+              placeholder="Your Message"
+              className="w-full p-3 border rounded-lg min-h-[150px] focus:ring-2 focus:ring-yellow-400 outline-none transition-all"
+              value={formData.message}
+              whileFocus={{ scale: 1.05 }}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
+            />
+          </motion.div>
+
+          <div className="flex justify-center">
+            <motion.button
+              type="submit"
+              className="px-8 py-4 text-base bg-orange-500 hover:bg-orange-400 text-white rounded-lg font-medium"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Send Message
+            </motion.button>
+          </div>
+        </form>
       </div>
-    </div>
+    </motion.div>
   );
 }
