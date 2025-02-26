@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { register, reset } from '../store/slices/authSlice';
-import { toast } from 'react-hot-toast';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { register, reset } from "../store/slices/authSlice";
+import { toast } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: 'student',
-    company: '',
+    name: "",
+    email: "",
+    password: "",
+    role: "student",
+    company: "",
   });
 
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function Register() {
     }
 
     if (isSuccess || user) {
-      navigate('/');
+      navigate("/");
     }
 
     dispatch(reset());
@@ -39,110 +39,74 @@ export default function Register() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="flex min-h-screen flex-col justify-center bg-gradient-to-r from-primary-50 to-primary-100 px-6 py-12 lg:px-8"
-    >
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <motion.h2
+    <div className="min-h-screen flex items-center justify-center bg-[#e8f4f4] p-6">
+      <div className="max-w-md w-full bg-white shadow-2xl rounded-2xl p-10">
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900"
+          transition={{ duration: 0.5 }}
         >
-          Create your account
-        </motion.h2>
-      </div>
+          <h2 className="text-3xl font-bold text-center text-gray-900">
+            Create Your Account 🎉
+          </h2>
+          <p className="mt-2 text-center text-gray-600">
+            Already have an account?{" "}
+            <a href="/login" className="text-blue-600 hover:underline font-medium">
+              Sign In
+            </a>
+          </p>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="mt-10 sm:mx-auto sm:w-full sm:max-w-md bg-white rounded-lg shadow-lg p-8"
-      >
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Full Name
-            </label>
-            <div className="mt-2">
+          <div className="my-6 border-b text-center">
+            <span className="bg-white px-3 text-gray-600">OR</span>
+          </div>
+
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div>
+              <label className="block font-medium text-gray-700">Full Name</label>
               <input
-                id="name"
-                name="name"
                 type="text"
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                placeholder="Enter your full name"
+                className="w-full py-3 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
               />
             </div>
-          </div>
 
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Email address
-            </label>
-            <div className="mt-2">
+            <div>
+              <label className="block font-medium text-gray-700">Email Address</label>
               <input
-                id="email"
-                name="email"
                 type="email"
-                autoComplete="email"
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                placeholder="Enter your email"
+                className="w-full py-3 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
               />
             </div>
-          </div>
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Password
-            </label>
-            <div className="mt-2">
+            <div>
+              <label className="block font-medium text-gray-700">Password</label>
               <input
-                id="password"
-                name="password"
                 type="password"
-                autoComplete="new-password"
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                placeholder="Create a password"
+                className="w-full py-3 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
                 value={formData.password}
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
               />
             </div>
-          </div>
 
-          <div>
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Role
-            </label>
-            <div className="mt-2">
+            <div>
+              <label className="block font-medium text-gray-700">Role</label>
               <select
-                id="role"
-                name="role"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                className="w-full py-3 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
                 value={formData.role}
                 onChange={(e) =>
                   setFormData({ ...formData, role: e.target.value })
@@ -152,45 +116,48 @@ export default function Register() {
                 <option value="employer">Employer</option>
               </select>
             </div>
-          </div>
 
-          {formData.role === 'employer' && (
-            <div>
-              <label
-                htmlFor="company"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Company Name
-              </label>
-              <div className="mt-2">
+            {formData.role === "employer" && (
+              <div>
+                <label className="block font-medium text-gray-700">Company Name</label>
                 <input
-                  id="company"
-                  name="company"
                   type="text"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  placeholder="Enter company name"
+                  className="w-full py-3 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
                   value={formData.company}
                   onChange={(e) =>
                     setFormData({ ...formData, company: e.target.value })
                   }
                 />
               </div>
-            </div>
-          )}
+            )}
 
-          <div>
-            <motion.button
+            <button
               type="submit"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full px-4 py-2 bg-primary-600 text-white font-semibold rounded-lg shadow-md hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all"
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg hover:opacity-90 transition transform hover:scale-105 font-semibold flex items-center justify-center"
               disabled={isLoading}
             >
-              {isLoading ? 'Creating account...' : 'Create account'}
-            </motion.button>
-          </div>
-        </form>
-      </motion.div>
-    </motion.div>
+              {isLoading ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+              ) : (
+                "Create Account"
+              )}
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-gray-600 text-sm">
+            By signing up, you agree to our{" "}
+            <a href="#" className="text-blue-600 hover:underline">
+              Terms & Conditions
+            </a>{" "}
+            and{" "}
+            <a href="#" className="text-blue-600 hover:underline">
+              Privacy Policy
+            </a>
+          </p>
+        </motion.div>
+      </div>
+    </div>
   );
 }

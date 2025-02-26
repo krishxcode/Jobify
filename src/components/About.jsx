@@ -1,92 +1,79 @@
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
-import { motion } from 'framer-motion';
-import image from "/Images/about.webp"
+import { motion } from "framer-motion";
+import { BriefcaseIcon, UsersIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
+import image from "/Images/men.webp"
 const stats = [
-  { label: 'Active Jobs', value: '10K+' },
-  { label: 'Companies', value: '2K+' },
-  { label: 'Job Seekers', value: '50K+' },
-  { label: 'Successful Placements', value: '5K+' },
+  { label: "Active Jobs", value: "10K+", icon: BriefcaseIcon },
+  { label: "Companies", value: "2K+", icon: UsersIcon },
+  { label: "Successful Placements", value: "5K+", icon: CheckCircleIcon },
 ];
 
-const benefits = [
-  'Advanced job matching algorithm',
-  'Professional resume builder',
-  'Interview preparation resources',
-  'Career growth guidance',
-  'Salary insights and negotiations',
-  'Company culture information',
-];
-
-export default function About() {
+export default function AboutPage() {
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 min-h-[90vh] flex items-center py-12">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
-        {/* Left Side: Text & Content */}
+    <div className="w-full min-h-[90vh] bg-gray-50 flex items-center justify-center py-16 px-6">
+      <div className="container mx-auto text-center">
+        {/* Heading Section */}
         <motion.div 
-          initial={{ opacity: 0, x: -50 }} 
-          animate={{ opacity: 1, x: 0 }} 
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="mb-12"
         >
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">About Us</h2>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
-            We're dedicated to connecting talented professionals with their dream jobs. Our platform
-            leverages cutting-edge technology to make job searching and hiring more efficient and effective.
+          <h1 className="text-4xl font-bold text-gray-900"><span className="text-orange-500 underline">About Us</span></h1>
+          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            Connecting job seekers with top companies, making the hiring process seamless and efficient.
           </p>
-
-          {/* Benefits Section */}
-          <div className="mt-10 rounded-2xl border border-white/10 p-6 text-base leading-7 text-gray-300 shadow-lg">
-            <h3 className="text-2xl font-bold tracking-tight text-white mb-6">Why Choose Us</h3>
-            <ul className="space-y-4">
-              {benefits.map((benefit, index) => (
-                <motion.li 
-                  key={benefit} 
-                  className="flex gap-x-3"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <CheckCircleIcon className="h-6 w-5 flex-none text-orange-400" aria-hidden="true" />
-                  {benefit}
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Statistics Section */}
-          <div className="mt-10 rounded-2xl border border-white/10 p-6 shadow-lg">
-            <h3 className="text-2xl font-bold tracking-tight text-white mb-6">Our Impact</h3>
-            <dl className="grid grid-cols-2 gap-8">
-              {stats.map((stat, index) => (
-                <motion.div 
-                  key={stat.label} 
-                  className="flex flex-col"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <dt className="text-sm leading-6 text-gray-300">{stat.label}</dt>
-                  <dd className="text-3xl font-semibold tracking-tight text-white">{stat.value}</dd>
-                </motion.div>
-              ))}
-            </dl>
-          </div>
         </motion.div>
 
-        {/* Right Side: Illustration */}
-        <motion.div 
-          initial={{ opacity: 0, x: 50 }} 
-          animate={{ opacity: 1, x: 0 }} 
-          transition={{ duration: 0.8 }}
-          className="flex justify-center"
-        >
-          <img 
-            src={image} 
-            alt="Job Search Illustration" 
-            className="w-full max-w-md lg:max-w-lg"
-          />
-        </motion.div>
-        
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Illustration */}
+          <motion.div 
+            className="flex justify-center"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <img 
+              src={image}
+              alt="Job Search Illustration"
+              className="w-full max-w-md lg:max-w-lg drop-shadow-xl"
+            />
+          </motion.div>
+
+          {/* Right: Content Section */}
+          <motion.div 
+            className="space-y-6 text-left"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl font-bold text-gray-900">Who We Are</h2>
+            <p className="text-gray-600 leading-relaxed">
+              Jobhire is a platform that connects job seekers with top companies. We make the hiring process smoother for both candidates and recruiters with our advanced tools and features.
+            </p>
+
+            {/* Stats Section */}
+            <div className="grid grid-cols-2 gap-6">
+              {stats.map((stat) => (
+                <div key={stat.label} className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md">
+                  <stat.icon className="h-10 w-10 text-orange-500" />
+                  <div>
+                    <p className="text-xl font-semibold text-gray-900">{stat.value}</p>
+                    <p className="text-gray-600">{stat.label}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Call to Action */}
+            <motion.button 
+              className="mt-6 px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Join Now
+            </motion.button>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

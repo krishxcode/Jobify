@@ -20,11 +20,11 @@ export default function Contact() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full min-h-screen bg-[#f8fafc] flex flex-col items-center px-4 py-16"
+      className="w-full min-h-screen  flex flex-col items-center px-4 py-16"
     >
       <div className="w-full max-w-4xl">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-2">Contact</h1>
+          <h1 className="text-4xl font-bold mb-2"><span className="text-orange-500 underline">Contact  Us</span></h1>
           <p className="text-gray-600">Send us a message or get in touch.</p>
         </div>
 

@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation } from 'react-router-dom';
@@ -33,7 +32,7 @@ export default function Navbar() {
   ];
 
   return (
-    <Disclosure as="nav" className="bg-white h-[10vh] shadow-lg sticky top-0 z-50">
+    <Disclosure as="nav" className="bg-white sm:h-auto md:h-[10vh] shadow-lg sticky top-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -111,8 +110,8 @@ export default function Navbar() {
                 )}
 
                 {/* Mobile menu button */}
-                <div className="flex items-center sm:hidden">
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none transition-colors">
+                <div className="flex items-center sm:hidden ">
+                  <Disclosure.Button className="inline-flex items-center justify-center p-2  rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none transition-colors">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />

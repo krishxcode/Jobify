@@ -1,5 +1,5 @@
 import React from "react";
-import image from "/Images/3d-render-person-working-computer-home-office-with-plants-bookshelves-cozy-workspace.png"
+import image from "/Images/laptop-boy.webp"
 export default function JobSearchHero() {
   return (
     <div className="min-h-screen flex items-center px-4 md:px-10 lg:px-40 bg-gray-50 py-10">
