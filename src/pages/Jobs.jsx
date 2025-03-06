@@ -20,8 +20,12 @@ export default function Jobs() {
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/jobs");
-      setJobs(response.data);
+      const response = await axios.get("http://localhost:8000/api/jobs/");
+      if (response.data.success) {
+        setJobs(response.data.jobs || []);
+      } else {
+        setJobs([]);
+      }
     } catch (error) {
       console.error("Error fetching jobs:", error);
     } finally {
@@ -37,14 +41,15 @@ export default function Jobs() {
 
     const matchesType = !filters.type || job.type === filters.type;
     const matchesLocation = !filters.location || job.location === filters.location;
-    const matchesSalary = !filters.salary || job.salary >= filters.salary;
+    const matchesSalary = !filters.salary || (job.salary && job.salary >= Number(filters.salary));
 
     return matchesSearch && matchesType && matchesLocation && matchesSalary;
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 py-12">
+      <div className="container mx-auto px-6 lg:px-12">
+        
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -52,28 +57,27 @@ export default function Jobs() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold mb-2 text-gray-800">Find Your Dream Job</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Browse through thousands of job opportunities from top companies around the world.
-            Your next career move is just a click away.
+          <h1 className="text-5xl font-extrabold text-gray-900 mb-3">🚀 Find Your Dream Job</h1>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+            Browse thousands of job opportunities from top companies. Your next career move is just a click away.
           </p>
         </motion.div>
 
-        {/* Search and Filter Section */}
+        {/* Search & Filters */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-lg shadow-md p-6 mb-8"
+          className="bg-white/90 backdrop-blur-md rounded-xl shadow-lg p-6 mb-10"
         >
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
-              <MagnifyingGlassIcon className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <MagnifyingGlassIcon className="h-5 w-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <motion.input
                 whileFocus={{ scale: 1.05 }}
                 type="text"
-                placeholder="Search jobs by title, company, or location"
-                className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                placeholder="Search jobs by title, company, or location..."
+                className="w-full border border-gray-300 rounded-lg p-3 pl-12 shadow-sm outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -81,7 +85,7 @@ export default function Jobs() {
             <div className="flex items-center gap-4">
               <motion.select
                 whileFocus={{ scale: 1.05 }}
-                className="border rounded-lg p-3 outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                className="border border-gray-300 rounded-lg p-3 shadow-sm outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                 value={filters.type}
                 onChange={(e) => setFilters({ ...filters, type: e.target.value })}
               >
@@ -94,7 +98,7 @@ export default function Jobs() {
 
               <motion.select
                 whileFocus={{ scale: 1.05 }}
-                className="border rounded-lg p-3 outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                className="border border-gray-300 rounded-lg p-3 shadow-sm outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                 value={filters.location}
                 onChange={(e) => setFilters({ ...filters, location: e.target.value })}
               >
@@ -107,45 +111,35 @@ export default function Jobs() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-indigo-600 text-white px-6 py-3 rounded-lg flex items-center transition-all shadow-md hover:bg-indigo-700"
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center transition-all shadow-md hover:bg-blue-700"
               >
                 <FunnelIcon className="h-5 w-5 mr-2" />
-                Filters
+                Apply Filters
               </motion.button>
             </div>
           </div>
         </motion.div>
 
-        {/* Jobs List */}
+        {/* Job Listings */}
         {loading ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-center py-12"
-          >
+          <motion.div className="text-center py-12">
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ repeat: Infinity, duration: 1 }}
-              className="mx-auto w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full"
+              className="mx-auto w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full"
             ></motion.div>
             <p className="mt-4 text-gray-600">Loading jobs...</p>
           </motion.div>
         ) : filteredJobs.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-center py-12"
-          >
-            <p className="text-gray-600">No jobs found matching your criteria.</p>
+          <motion.div className="text-center py-12">
+            <p className="text-gray-600 text-lg">⚠️ No jobs found matching your criteria.</p>
           </motion.div>
         ) : (
-          <motion.div
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="grid gap-6"
           >
             {filteredJobs.map((job) => (
               <motion.div
