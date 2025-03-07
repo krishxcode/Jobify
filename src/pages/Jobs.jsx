@@ -20,7 +20,7 @@ export default function Jobs() {
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/jobs/");
+      const response = await axios.get("https://jobify-backend-05by.onrender.com/api/jobs/");
       if (response.data.success) {
         setJobs(response.data.jobs || []);
       } else {
